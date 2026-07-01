@@ -1,6 +1,6 @@
 # Brainiac × Cowork integration — canonical spec
 
-This is the **single source of truth** for how any consumer project (Nolan, a <a-course> class Cowork project, a future research project, etc.) integrates with Brainiac. Other projects' integration files (e.g., `<nolan>/system/brainiac-integration.md`) reference this document.
+This is the **single source of truth** for how any consumer project (Nolan, a <a-course> class Cowork project, a future research project, etc.) integrates with Brainiac. Other projects' integration files (e.g., `<assistant-project>/system/brainiac-integration.md`) reference this document.
 
 ## The pattern in one paragraph
 
@@ -177,4 +177,4 @@ After wiring a consumer:
 
 ## Maintaining this document
 
-This doc is the canonical reference. When something changes (new field in `cowork-captures.txt`, new boundary rule, new mutating mode added to brainiac), update **here first**, then update the consumer-specific files (`<nolan>/system/brainiac-integration.md`, the <a-course> CLAUDE.md block, etc.) to match. Don't let consumer files drift from this spec.
+This doc is the canonical reference. When something changes (new field in `cowork-captures.txt`, new boundary rule, new mutating mode added to brainiac), update **here first**, then update the consumer-specific files (`<assistant-project>/system/brainiac-integration.md`, the <a-course> CLAUDE.md block, etc.) to match. Don't let consumer files drift from this spec.

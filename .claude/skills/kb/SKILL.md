@@ -396,7 +396,7 @@ Don't reorder lines, don't delete them. The annotation is the durable record.
 2. Run the file through the same Step 1.3–1.7 flow (parse → summary → rename → index).
 3. **Stamp `pulled_from` in the frontmatter** of `_summary.md`:
    ```yaml
-   pulled_from: ~/Library/CloudStorage/OneDrive-org/Teaching/<a-course>/Sp25/syllabus.pdf
+   pulled_from: ~/Library/CloudStorage/OneDrive-<your-org>/Teaching/<a-course>/Sp25/syllabus.pdf
    ```
    This preserves provenance.
 4. Append to `work/log.md` with a `pulled` marker.
@@ -412,12 +412,12 @@ The original file in OneDrive is untouched.
 ### Step 6.1 — Locate the OneDrive folder
 
 Read `work/crossrefs.md` first to get the canonical path. As of 2026-05, your path is:
-`~/Library/CloudStorage/OneDrive-YourOrg/Faculty/`
+`~/Library/CloudStorage/OneDrive-<your-org>/Faculty/`
 
 Legacy fallback candidates if `crossrefs.md` is silent:
 - `~/Library/CloudStorage/OneDrive-Personal/Teaching/`
-- `~/Library/CloudStorage/OneDrive-<org-name>/Teaching/`
-- `~/Library/CloudStorage/OneDrive-<org-name>/Faculty/`
+- `~/Library/CloudStorage/OneDrive-<your-org>/Teaching/`
+- `~/Library/CloudStorage/OneDrive-<your-org>/Faculty/`
 
 If still unclear, ask the user.
 
