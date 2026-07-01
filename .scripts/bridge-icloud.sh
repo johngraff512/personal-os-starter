@@ -6,7 +6,7 @@
 #
 # Why this exists:
 #   iPhone/iPad Obsidian can only see vaults inside the iCloud Obsidian
-#   namespace. Brainiac vaults live at ~/Documents/AI Development/brainiac/
+#   namespace. Brainiac vaults live at $BRAINIAC_ROOT/
 #   — a git repo with scripts and a venv, which is hostile territory for iCloud.
 #   So iOS Web Clipper writes clips to iCloud transit vaults named "personal"
 #   and "work", and this bridge ferries them into brainiac for /kb to process.

@@ -13,7 +13,7 @@ Two skills, namespaced under `brainiac:`:
 
 The canonical kb skill (in `<brainiac>/.claude/skills/kb/`) assumes brainiac data is reachable from cwd or canonical paths. This plugin version adds a **pre-flight step** that locates the brainiac data dynamically:
 
-1. Canonical Mac path (`~/Documents/AI Development/brainiac/`) — preferred; full mutating modes available IF cwd is also under there.
+1. Canonical Mac path (`$BRAINIAC_ROOT/`) — preferred; full mutating modes available IF cwd is also under there.
 2. Project-local cache (`<cwd>/.brainiac-cache/` or any ancestor up to `/`) — for Cowork sessions running inside a consumer project that has the cache.
 3. Shared cache (`~/.brainiac-cache/`) — fallback for Cowork sessions with no project context (e.g., New Task).
 4. Auto-clone to `~/.brainiac-cache/` if none of the above exist — **requires `$BRAINIAC_PAT` env var** (fine-grained GitHub PAT, read-only on `<your-github-user>/brainiac`). In Cowork this comes from a per-project `.env` file; see `brainiac/.claude/integration/cowork-integration.md` Mode 1.

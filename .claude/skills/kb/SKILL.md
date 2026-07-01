@@ -1,11 +1,11 @@
 ---
 name: kb
-description: Brainiac knowledge-base operations. Use this skill when the user asks to process the brainiac inbox, ingest a captured article/PDF, query the personal or work knowledge base, promote ideas from ideas.md to permanent locations, pull a file from OneDrive into the work vault, refresh the course-archive index, sync brainiac to GitHub, or any request involving the dual-vault file-based knowledge base at ~/Documents/AI Development/brainiac/. Triggers on "/kb", "/kb ask [question]", "/kb update", "/kb ideas", "/kb pull [path]", "/kb archive scan", "/kb sync", "process my inbox", "what have I bookmarked about X", "promote my ideas", or any brainiac-related request.
+description: Brainiac knowledge-base operations. Use this skill when the user asks to process the brainiac inbox, ingest a captured article/PDF, query the personal or work knowledge base, promote ideas from ideas.md to permanent locations, pull a file from OneDrive into the work vault, refresh the course-archive index, sync brainiac to GitHub, or any request involving the dual-vault file-based knowledge base at $BRAINIAC_ROOT/. Triggers on "/kb", "/kb ask [question]", "/kb update", "/kb ideas", "/kb pull [path]", "/kb archive scan", "/kb sync", "process my inbox", "what have I bookmarked about X", "promote my ideas", or any brainiac-related request.
 ---
 
 # /kb — Brainiac knowledge-base operations
 
-Brainiac is a dual-vault file-based knowledge base at `~/Documents/AI Development/brainiac/`. Plain markdown is the source of truth — no DB, no embeddings, no RAG. This skill provides seven modes that ingest, query, and maintain the vaults.
+Brainiac is a dual-vault file-based knowledge base at `$BRAINIAC_ROOT/`. Plain markdown is the source of truth — no DB, no embeddings, no RAG. This skill provides seven modes that ingest, query, and maintain the vaults.
 
 **Read [the project plan](~/.claude/plans/i-am-interested-in-zesty-lovelace.md) once if you haven't seen it before. It's the canonical architecture document.**
 
@@ -13,7 +13,7 @@ Brainiac is a dual-vault file-based knowledge base at `~/Documents/AI Developmen
 
 | Path | Purpose |
 |---|---|
-| `~/Documents/AI Development/brainiac/` | The brainiac root — referred to as `$BRAINIAC` below |
+| `$BRAINIAC_ROOT/` | The brainiac root — referred to as `$BRAINIAC` below |
 | `$BRAINIAC/CLAUDE.md` | Master schema (already loaded if you're invoked from any vault) |
 | `$BRAINIAC/personal/` | Vault 1 — personal-brainiac |
 | `$BRAINIAC/work/` | Vault 2 — work-brainiac (APA citations, <your-org>/teaching) |
@@ -27,12 +27,12 @@ Brainiac is a dual-vault file-based knowledge base at `~/Documents/AI Developmen
 - `$BRAINIAC/work/...` → vault is `work`
 - `$BRAINIAC/` (root) → both vaults; ask the user to pick or process both
 
-**Detect canonical vs. read-only clone.** Brainiac has exactly one canonical location: `~/Documents/AI Development/brainiac/` on your Mac. **Any other path** — e.g., `<some-project>/.brainiac-cache/`, or the path returned by `pwd` inside a Cowork session that pulled the brainiac repo — is a **read-only clone**. Detection rule:
+**Detect canonical vs. read-only clone.** Brainiac has exactly one canonical location: `$BRAINIAC_ROOT/` on your Mac. **Any other path** — e.g., `<some-project>/.brainiac-cache/`, or the path returned by `pwd` inside a Cowork session that pulled the brainiac repo — is a **read-only clone**. Detection rule:
 
-- If `$BRAINIAC` resolves to `~/Documents/AI Development/brainiac/` (or a subdirectory) → **canonical**. All modes available.
+- If `$BRAINIAC` resolves to `$BRAINIAC_ROOT/` (or a subdirectory) → **canonical**. All modes available.
 - If `$BRAINIAC` is any other path (most reliably: contains `.brainiac-cache/` in its path, but also true of any other filesystem location) → **clone**. **Only `/kb ask` is allowed.** For any mutating mode (`/kb` process inbox, `/kb update`, `/kb ideas`, `/kb pull`, `/kb archive scan`, `/kb sync`), refuse with this message and stop:
 
-  > Read-only clone detected at `<path>`. Mutating modes must run from the canonical brainiac at `~/Documents/AI Development/brainiac/` on the Mac. From here you can only `/kb ask <question>`. To capture content back to brainiac, use the `cowork-captures.txt` mechanism documented at `<cache>/.claude/integration/cowork-integration.md`.
+  > Read-only clone detected at `<path>`. Mutating modes must run from the canonical brainiac at `$BRAINIAC_ROOT/` on the Mac. From here you can only `/kb ask <question>`. To capture content back to brainiac, use the `cowork-captures.txt` mechanism documented at `<cache>/.claude/integration/cowork-integration.md`.
 
 This prevents accidental writes to a clone (which would diverge from the canonical and either get lost on next `git pull --ff-only` or cause merge conflicts).
 

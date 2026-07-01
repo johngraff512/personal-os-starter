@@ -37,9 +37,9 @@ This is a thin pointer to the canonical implementation. **Read `.claude/skills/k
 ## Active-vault detection
 
 Same rules as `/kb`:
-- `~/Documents/AI Development/brainiac/personal/...` → personal
-- `~/Documents/AI Development/brainiac/work/...` → work
-- `~/Documents/AI Development/brainiac/` (root) → ask user, or run on both
+- `$BRAINIAC_ROOT/personal/...` → personal
+- `$BRAINIAC_ROOT/work/...` → work
+- `$BRAINIAC_ROOT/` (root) → ask user, or run on both
 
 ## See also
 

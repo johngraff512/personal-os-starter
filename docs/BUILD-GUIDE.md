@@ -81,7 +81,7 @@ If a future tool is better, you keep the markdown and throw away everything else
 - **Claude Code** (the CLI) — this is what runs the `/kb` skill. [screenshot: Claude Code installed and running in a terminal]
 - **A markdown editor** — [Obsidian](https://obsidian.md) is recommended (free; opens the folder natively, renders wiki-links, works on iOS/iPad). Any editor works — the data is plain files.
 - **git + a GitHub account** — for sync and (later) AI-agent access. A private repo is fine.
-- **A folder** to hold it all. The reference setup uses `~/Documents/AI Development/brainiac/`.
+- **A folder** to hold it all — its path becomes your `$BRAINIAC_ROOT` (e.g. `~/Documents/brainiac/`). `setup.sh` writes your chosen path everywhere the docs reference `$BRAINIAC_ROOT`.
 
 ### 1.1 The repo structure
 

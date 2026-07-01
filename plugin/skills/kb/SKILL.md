@@ -36,8 +36,8 @@ Don't fail on pull errors — offline / no auth / non-fast-forward should not bl
 
 Read `$BRAINIAC/.claude/skills/kb/SKILL.md` and follow its instructions for the user's actual request, with these substitutions:
 
-- Wherever the canonical skill refers to absolute brainiac paths (e.g., `~/Documents/AI Development/brainiac/...`), substitute `$BRAINIAC/...` instead.
-- The canonical skill's "canonical vs. clone" detection (refusing mutating modes when cwd is anything other than `~/Documents/AI Development/brainiac/`) applies as-is. From a Cowork session, this means **only `/kb ask` is allowed** unless the session happens to be running directly inside the canonical brainiac repo on your Mac.
+- Wherever the canonical skill refers to absolute brainiac paths (e.g., `$BRAINIAC_ROOT/...`), substitute `$BRAINIAC/...` instead.
+- The canonical skill's "canonical vs. clone" detection (refusing mutating modes when cwd is anything other than `$BRAINIAC_ROOT/`) applies as-is. From a Cowork session, this means **only `/kb ask` is allowed** unless the session happens to be running directly inside the canonical brainiac repo on your Mac.
 - For `/kb ask`, follow §2 of the canonical skill verbatim — load index, identify candidates, read summaries, compose cited answer.
 
 ## Step 3 — Capture-back (when applicable)
@@ -62,7 +62,7 @@ If push fails (no auth in this Cowork environment), warn the user that the captu
 
 The canonical skill already refuses mutating modes when cwd is not the canonical brainiac path. From any Cowork session, that detection will trigger. If the user invokes any of `/kb` (process inbox), `/kb update`, `/kb ideas`, `/kb pull`, `/kb archive scan`, `/kb sync` — the canonical skill will refuse with its standard message:
 
-> Read-only clone detected at `<path>`. Mutating modes must run from the canonical brainiac at `~/Documents/AI Development/brainiac/` on the Mac. From here you can only `/kb ask <question>`. To capture content back to brainiac, use the `cowork-captures.txt` mechanism documented at `<cache>/.claude/integration/cowork-integration.md`.
+> Read-only clone detected at `<path>`. Mutating modes must run from the canonical brainiac at `$BRAINIAC_ROOT/` on the Mac. From here you can only `/kb ask <question>`. To capture content back to brainiac, use the `cowork-captures.txt` mechanism documented at `<cache>/.claude/integration/cowork-integration.md`.
 
 Don't bypass this. The plugin is intentionally read-only from Cowork — mutating work happens on your Mac.
 

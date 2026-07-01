@@ -10,7 +10,7 @@ There are two environments, and what you can do depends on which you're in:
 
 | Environment | Where | What it is | What you can do |
 |---|---|---|---|
-| **Code** | Claude Code on the Mac, run from `~/Documents/AI Development/brainiac/` | The **canonical** brainiac — the source of truth | **Everything** — ingest, query, maintain, sync |
+| **Code** | Claude Code on the Mac, run from `$BRAINIAC_ROOT/` | The **canonical** brainiac — the source of truth | **Everything** — ingest, query, maintain, sync |
 | **Cowork** | A consumer project's `.brainiac-cache/` (Nolan, Acme Corp, <a-course>, etc.) | A **read-only clone** pulled from GitHub | **Query only** (`kb ask`) — all writing is refused |
 
 Writes only happen in **Code** on the Mac. Cowork reads a copy and can ask questions; to push content *back* to brainiac from Cowork, use the capture-back file (bottom of page).
@@ -71,7 +71,7 @@ After this, open the project in Cowork and use `kb ask "..."`. No PAT, no `.env`
 
 ### ⚠️ Never host the cache in a OneDrive-synced folder
 
-Don't put `.brainiac-cache/` inside an OneDrive folder (e.g. `OneDrive .../Faculty/<course>/`). OneDrive would sync the **entire brainiac repo — including your `personal/` vault and all `.git` internals — up to your org's cloud.** That's a privacy/data-governance problem and it spams OneDrive with thousands of git objects. There's also no clean way on macOS to exclude one subfolder from OneDrive upload. The cache belongs in a **local** folder under `~/Documents/Claude/Projects/`, which is also where `/kb sync`'s auto-refresh looks.
+Don't put `.brainiac-cache/` inside an OneDrive folder (e.g. `OneDrive .../Faculty/<course>/`). OneDrive would sync the **entire brainiac repo — including your `personal/` vault and all `.git` internals — up to your org's cloud.** That's a privacy/data-governance problem and it spams OneDrive with thousands of git objects. There's also no clean way on macOS to exclude one subfolder from OneDrive upload. The cache belongs in a **local** folder under `~/Projects/`, which is also where `/kb sync`'s auto-refresh looks.
 
 ### Course projects that use OneDrive materials (the two-folder pattern)
 
@@ -79,7 +79,7 @@ A Cowork project can be pointed at **more than one folder**. For a course where 
 
 | Folder attached to the Cowork project | Holds | Synced to your org cloud? |
 |---|---|---|
-| `~/Documents/Claude/Projects/<Course>/` | `.brainiac-cache/` + the `.claude/skills` symlinks | No — local only ✅ |
+| `~/Projects/<Course>/` | `.brainiac-cache/` + the `.claude/skills` symlinks | No — local only ✅ |
 | `~/Library/CloudStorage/OneDrive-.../Faculty/<Course>/` | Class documents (slides, readings, etc.) | Yes (already lives there) |
 
 This is the verified setup for **<a-course>** (validated 2026-06-04): brainiac cache in the local project folder, OneDrive `Faculty/<a-course>/` attached as a second folder for class docs. `kb ask` resolves the skill from the local cache; Cowork can read the OneDrive docs in the same session. Best of both, with no personal-vault data leaking to OneDrive.
@@ -118,7 +118,7 @@ The next `/kb` run on the Mac detects these, proposes how to merge them, and cle
 
 | Path | What |
 |---|---|
-| `~/Documents/AI Development/brainiac/` | Canonical brainiac (Mac) |
+| `$BRAINIAC_ROOT/` | Canonical brainiac (Mac) |
 | `personal/`, `work/` | The two vaults — each has its own `CLAUDE.md`, `index.md`, `topics.md`, `log.md`, `ideas.md`, `aa-inbox/` |
 | `aa-inbox/` (top level) | "Route it later" drop zone — `/kb` proposes a vault |
 | `<vault>/aa-inbox/urls.txt` | Append URLs here (iOS Shortcut target) |
