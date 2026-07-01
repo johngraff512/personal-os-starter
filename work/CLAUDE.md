@@ -64,7 +64,7 @@ When `/kb ask` runs in this vault:
 
 1. Answer from `work/index.md` + summaries first.
 2. If external context is needed, read `crossrefs.md` to identify the right surface.
-3. **Ask before reading** from any external surface (`<your-research-kb>/`, OneDrive, `Claude Working/`, `big-ideas/`).
+3. **Ask before reading** from any external surface (`<your-research-kb>/`, OneDrive, `<your-other-kb>/`, `<your-other-kb>/`).
 4. For OneDrive specifically: prefer `course-archive-index.md` (metadata only) before reading individual files.
 
 ## Privacy opt-out

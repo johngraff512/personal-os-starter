@@ -20,7 +20,7 @@ Idempotent — safe to re-run on a project that's already been set up.
 
 ## When to invoke
 
-When the user is in a new consumer project (Nolan, <a-course>, executive-panel-simulator, mccombs-research-web, etc.) and wants `/kb` available there. Triggers include the phrases listed in the description, plus any request that boils down to "wire this project up to brainiac."
+When the user is in a new consumer project (Nolan, <a-course>, another-project, <your-research-kb>, etc.) and wants `/kb` available there. Triggers include the phrases listed in the description, plus any request that boils down to "wire this project up to brainiac."
 
 **Do NOT invoke** when:
 - The user is already inside the brainiac repo itself (no cache needed; skill is already at project root).

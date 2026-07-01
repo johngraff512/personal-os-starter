@@ -31,7 +31,7 @@ Per-project setup (one-time per Cowork project where you want `/kb ask` to work)
 
 2. **In a Cowork session against the project**, at project root:
    ```bash
-   echo "BRAINIAC_PAT=ghp_xxxxxxxxxxxxxxxxxxxxxx" > .env
+   echo "BRAINIAC_PAT=ghp_your_token_here" > .env
    grep -qxF '.env' .gitignore 2>/dev/null || echo '.env' >> .gitignore
    git add .gitignore && git commit -m "gitignore .env for brainiac PAT" && git push
    ```
@@ -126,7 +126,7 @@ Examples:
 ```
 2026-05-10T14:23 | nolan       | idea | personal | Should test Karpathy's per-folder CLAUDE.md pattern
 2026-05-10T14:25 | projectx      | url  | work     | https://example.com/llm-evaluation-paper | Possible Class 4 reading
-2026-05-10T16:02 | research    | note | work     | Atlas Energy AI risk register: implementation could become a teaching case
+2026-05-10T16:02 | research    | note | work     | Acme Corp AI risk register: implementation could become a teaching case
 ```
 
 After appending, commit and push the cache:
@@ -162,7 +162,7 @@ Latency: at minimum, the time between when you push and when you next runs `/kb`
 The trigger phrases and skill names that the consumer's CLAUDE.md uses to invoke this integration. Examples:
 
 - **Nolan**: triggers like `"What did I bookmark about X?"`, `"Capture this for brainiac"`, `"Save the idea: ..."`. Implemented as a `save-to-brainiac` skill in Nolan's `skills/` directory.
-- **<a-course>**: triggers like `"What past Atlas Energy materials do I have?"`, `"Save this PDF for class 4"`. Implemented inline in the project's CLAUDE.md as instructions to the agent.
+- **<a-course>**: triggers like `"What past Acme Corp materials do I have?"`, `"Save this PDF for class 4"`. Implemented inline in the project's CLAUDE.md as instructions to the agent.
 - **Research project**: triggers tailored to research workflow; same underlying mechanism.
 
 Everything else (cache path, file format, skill behavior, git operations) is identical across consumers.

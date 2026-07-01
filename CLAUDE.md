@@ -64,5 +64,5 @@ Two LaunchAgents handle background work. **All scripts run from `~/.local/bin/` 
 
 ## Cross-references
 
-- `work/crossrefs.md` — pointers to `<your-research-kb>/`, `Claude Working/`, `big-ideas/`, OneDrive class library
+- `work/crossrefs.md` — pointers to `<your-research-kb>/`, `<your-other-kb>/`, `<your-other-kb>/`, OneDrive class library
 - `work/course-archive-index.md` — metadata-only index of OneDrive Teaching folder (no file contents copied; built by `/kb archive scan`)

@@ -300,7 +300,7 @@ For each item with `extraction: summary` in its frontmatter, note that the full 
 
 ### Step 2.3 — Consult external surfaces (work vault only)
 
-If the question mentions or implies external knowledge surfaces (<your-research-kb>, OneDrive Teaching, big-ideas, Claude Working):
+If the question mentions or implies external knowledge surfaces (<your-research-kb>, OneDrive Teaching, <your-other-kb>, <your-other-kb>):
 
 1. Identify which surface from `crossrefs.md`.
 2. **Ask the user before reading from external surfaces** — never read silently. Format: "This question seems to involve [surface]. Should I read from there?"
@@ -359,7 +359,7 @@ For each new idea, propose one of four destinations based on content:
 | Idea pattern | Promote to |
 |---|---|
 | Rule / convention ("always do X", "for future syllabi…", "never present a case without…") | Append to relevant `<vault>/<folder>/CLAUDE.md` (creating the file if needed) |
-| Topic-specific note ("Atlas Energy class should open with their AI risk register") | Append to `<vault>/<folder>/notes.md` (creating folder + file if needed) |
+| Topic-specific note ("Acme Corp class should open with their AI risk register") | Append to `<vault>/<folder>/notes.md` (creating folder + file if needed) |
 | Future writing seed ("blog post idea: ...") | Append to `<vault>/outputs/seeds.md` (creating if needed) |
 | Pure memory, no clear action ("interesting that …") | Leave as `→ kept` annotation |
 
@@ -412,7 +412,7 @@ The original file in OneDrive is untouched.
 ### Step 6.1 — Locate the OneDrive folder
 
 Read `work/crossrefs.md` first to get the canonical path. As of 2026-05, your path is:
-`~/Library/CloudStorage/OneDrive-TheUniversityofTexasatAustin/Faculty/`
+`~/Library/CloudStorage/OneDrive-YourOrg/Faculty/`
 
 Legacy fallback candidates if `crossrefs.md` is silent:
 - `~/Library/CloudStorage/OneDrive-Personal/Teaching/`
@@ -455,10 +455,12 @@ cd "$BRAINIAC" && .venv/bin/python .scripts/archive_scan.py
 
 The script encodes the routing rules and exclusion logic in one place. Modify it (not just the spec) when rules change.
 
-**Routing rules baked into the script (as of 2026-05-15):**
+> **Note:** `archive_scan.py` is intentionally **not shipped** in this template — the routing/exclusion rules are specific to how you organize your own cloud store. The section below documents the pattern so you can write your own if you want the `/kb archive scan` mode. Delete this mode from the skill if you don't use an external teaching/reference archive.
+
+**Routing rules baked into the script (example):**
 - Top-level subfolder → display course via `COURSE_MAP`:
-  - `BA 288/` → `<a-course>`, `EMBA/` → `<a-course>`
-  - `Davern Class/` → `<a-course> (Davern)` (the class itself — co-taught. Not the Fall 2026 undergrad innovation course <a-course>, which is separate and has no OneDrive material yet)
+  - `<Course-Folder-A>/` → `<a-course>`, `<Course-Folder-B>/` → `<a-course>`
+  - `<Co-Taught-Class>/` → `<a-course>` (a class co-taught with a colleague, kept as its own identity)
   - `AI/` → `ai-teaching` (so future `/kb pull` lands in the existing `work/ai-teaching/` folder, not a new `courses/` subfolder)
   - All others keep their folder name as the display course; loose root-level files get `course = (general)`.
 - **Collapse-to-single-row folders** (`COLLAPSE_TO_SINGLE_ROW`): `Teaching Awards/` collapses to one folder-summary row listing the contents. Add other small reference-only folders here as needed.
@@ -471,7 +473,7 @@ The script encodes the routing rules and exclusion logic in one place. Modify it
 - `title` — sanitized filename. Files in DO_NOT_PULL folders get `(do-not-pull)` appended.
 - `topic` — best-effort one-liner from sub-folder context; blank if uninferrable.
 
-For genuinely ambiguous metadata in small surrounding folders (`Course Content Graff/`, `Framemaking/`, `MOII/`, `TEE/`, `Independent Study/`, `Peer Networking Circle/`), the script falls back to keeping the folder name as the display course. Adjust via `COURSE_MAP` rather than in-place edits to `course-archive-index.md`.
+For genuinely ambiguous metadata in small surrounding folders (`Course Materials/`, `Lectures/`, `Misc/`, etc.), the script falls back to keeping the folder name as the display course. Adjust via `COURSE_MAP` rather than in-place edits to `course-archive-index.md`.
 
 ### Step 6.4 — Write the index
 
