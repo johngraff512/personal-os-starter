@@ -1,0 +1,78 @@
+# Credentials — never commit
+*.env
+.env*
+**/secrets/
+
+# Private planning notes (e.g. a sanitization/publishing plan) — never publish
+PUBLISHING.md
+
+# setup.sh leaves *.bak backups next to each edited file — don't commit them
+*.bak
+
+# Transient render output (HTML reports, etc.) — generated, never source-of-truth
+.cache/
+
+# LaunchAgent / process-inbox logs (transient, regenerated each run).
+# Note: live LaunchAgent runtime logs go to ~/Library/Logs/brainiac/ (outside
+# the repo) because macOS TCC blocks launchd from appending to log files in
+# ~/Documents that were created by Terminal-spawned processes. The entries
+# below cover any manual Terminal runs that produce in-repo logs.
+.scripts/last-run.log
+.scripts/launchagent.log
+
+# Cowork plugin build artifacts (generated from plugin/ source via `zip` or
+# from Cowork's create-cowork-plugin wizard). Both .zip and .plugin file
+# extensions appear depending on packaging path.
+brainiac-plugin.zip
+*.plugin
+
+# Claude Code worktrees — these are git's per-branch working trees that live
+# under .claude/worktrees/<name>/ during a session. They share the same .git
+# as canonical and should NEVER be staged into a main-branch commit (that
+# would duplicate or corrupt the tracked tree).
+.claude/worktrees/
+
+# .brainiac-cache directories — read-only clones used by consumer projects
+# (your assistant, a class project, etc.). They live INSIDE consumer projects,
+# never inside the canonical KB, but defensively gitignore here too in case a
+# tool accidentally creates one at the KB root.
+.brainiac-cache/
+
+# Note: cowork-captures.txt at the repo root IS tracked (it round-trips via
+# git from consumer projects to canonical brainiac and back). Don't ignore it.
+
+# Archived originals after DOCX/PPTX→PDF conversion
+**/.processed/
+
+# Raw documents in inboxes — these are transient (processed and moved out by /kb).
+# Don't ship copyrighted PDFs to GitHub. Track only the urls.txt drop target and
+# the .gitkeep marker that preserves empty inbox directories.
+**/aa-inbox/*
+!**/aa-inbox/urls.txt
+!**/aa-inbox/.gitkeep
+!aa-inbox/  # the parent dir itself is tracked
+
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+.python-version
+
+# macOS
+.DS_Store
+
+# Editor cruft
+.vscode/
+.idea/
+*.swp
+
+# Obsidian (vault-local config — let users keep their own)
+**/.obsidian/workspace*
+**/.obsidian/cache
+
+# OpenAI Codex CLI artifacts (auto-generated mirror of CLAUDE.md / .claude/skills; not part of brainiac)
+AGENTS.md
+.agents/

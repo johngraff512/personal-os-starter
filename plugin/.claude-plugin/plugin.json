@@ -1,0 +1,7 @@
+{
+  "name": "brainiac",
+  "version": "0.3.1",
+  "description": "Brainiac knowledge-base query for Cowork — read-only access to your dual-vault file-based KB at github.com/<your-github-user>/brainiac. Auto-discovers brainiac data location (canonical Mac path, project-local cache, or shared cache); falls back to auto-clone using $BRAINIAC_PAT (fine-grained GitHub PAT) from the project's .env file.",
+  "author": { "name": "you Graff" },
+  "homepage": "https://github.com/<your-github-user>/brainiac"
+}

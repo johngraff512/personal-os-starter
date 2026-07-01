@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+  brainiac — daily 6:30 am inbox processor. (macOS only — launchd. On Windows use
+  Task Scheduler; on Linux use cron or a systemd timer. See docs/BUILD-GUIDE.md §2.4.)
+
+  NOTE: launchd does NOT expand environment variables inside <string> values.
+  The $BRAINIAC_ROOT and $HOME tokens below are placeholders — `setup.sh` resolves
+  them to real absolute paths (e.g. /Users/you/…) on first run. If you edit this
+  file by hand, use absolute paths, not variables.
+
+  Install:
+      cp $BRAINIAC_ROOT/.scripts/com.example.brainiac.plist \
+         ~/Library/LaunchAgents/
+      launchctl load -w ~/Library/LaunchAgents/com.example.brainiac.plist
+
+  Verify it's registered:
+      launchctl list | grep brainiac
+
+  Trigger manually for testing:
+      launchctl start com.example.brainiac
+      tail -f "$BRAINIAC_ROOT/.scripts/launchagent.log"
+
+  Unload (if you ever need to disable):
+      launchctl unload -w ~/Library/LaunchAgents/com.example.brainiac.plist
+-->
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.example.brainiac</string>
+
+    <key>ProgramArguments</key>
+    <array>
+        <string>$BRAINIAC_ROOT/.scripts/process-inbox.sh</string>
+    </array>
+
+    <!-- Daily at 6:30 am local time. -->
+    <key>StartCalendarInterval</key>
+    <dict>
+        <key>Hour</key>
+        <integer>6</integer>
+        <key>Minute</key>
+        <integer>30</integer>
+    </dict>
+
+    <!-- Don't fire on launchctl load — only on schedule. -->
+    <key>RunAtLoad</key>
+    <false/>
+
+    <!-- If the Mac was asleep at 6:30, fire on next wake. -->
+    <key>StartCalendarIntervalRunOnIdle</key>
+    <true/>
+
+    <!-- Logs (gitignored). -->
+    <key>StandardOutPath</key>
+    <string>$BRAINIAC_ROOT/.scripts/launchagent.log</string>
+
+    <key>StandardErrorPath</key>
+    <string>$BRAINIAC_ROOT/.scripts/launchagent.log</string>
+
+    <!-- Minimal env. process-inbox.sh sets its own PATH defensively, but we
+         set HOME here so any tool that reads $HOME (e.g. ssh, git, gh) works. -->
+    <key>EnvironmentVariables</key>
+    <dict>
+        <key>HOME</key>
+        <string>$HOME</string>
+        <key>PATH</key>
+        <string>$HOME/.local/bin:/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin</string>
+    </dict>
+</dict>
+</plist>
