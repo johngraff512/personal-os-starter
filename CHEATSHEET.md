@@ -2,6 +2,8 @@
 
 Quick reference for the dual-vault knowledge base (`personal/`, `work/`).
 
+> **⚠️ Platform note — this cheat sheet reflects a macOS setup.** The *concepts and commands* (`/kb`, `kb ask`, the read-only cache + symlinks, capture-back) are cross-platform, but this page is written around Mac-specific specifics: **LaunchAgents** (launchd), **iCloud/OneDrive** paths, `~/Documents/...` locations, `security`/Keychain, and symlinks via `ln -s`. On **Windows/Linux**, substitute the equivalents — Task Scheduler or cron/systemd for LaunchAgents; your own sync provider for iCloud; `mklink /D` (Windows) for symlinks; Credential Manager/`secret-tool` for the Keychain. The full mapping is in [`docs/BUILD-GUIDE.md`](docs/BUILD-GUIDE.md) → **Platform support**; this page assumes you're on a Mac.
+
 ## The one rule that explains everything
 
 There are two environments, and what you can do depends on which you're in:

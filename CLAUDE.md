@@ -12,7 +12,7 @@ A file-system knowledge base inspired by Karpathy's LLM-Wiki pattern and built o
 - `personal/aa-inbox/`, `work/aa-inbox/` — direct vault inboxes from Mac Web Clipper (writes here directly), Finder drag-drop, and `/kb pull`.
 - `personal/aa-inbox/urls.txt`, `work/aa-inbox/urls.txt` — append-only URL drop targets from iOS Shortcuts (works for open content; gated content requires Web Clipper).
 - `personal/ideas.md`, `work/ideas.md` — append-only idea logs from voice-triggered iOS Shortcuts.
-- **iOS/iPadOS Web Clipper** → writes to `~/Library/Mobile Documents/iCloud~md~obsidian/Documents/<vault>/aa-inbox/` (iCloud-synced "transit vaults" named `personal` and `work`, mirroring brainiac's vaults). The `com.example.brainiac.icloud-pull` LaunchAgent ferries new clips into `<vault>/aa-inbox/` every 5 min. iPhone Obsidian only sees iCloud-namespaced vaults — brainiac itself can't be opened from iOS, so the transit-vault pattern is the bridge.
+- **iOS/iPadOS Web Clipper** → writes to `~/Library/Mobile Documents/iCloud~md~obsidian/Documents/<vault>/aa-inbox/` (iCloud-synced "transit vaults" named `personal` and `work`, mirroring brainiac's vaults). The `com.<you>.<kb>.icloud-pull` LaunchAgent ferries new clips into `<vault>/aa-inbox/` every 5 min. iPhone Obsidian only sees iCloud-namespaced vaults — brainiac itself can't be opened from iOS, so the transit-vault pattern is the bridge.
 
 ## LaunchAgent infrastructure
 
@@ -20,8 +20,8 @@ Two LaunchAgents handle background work. **All scripts run from `~/.local/bin/` 
 
 | LaunchAgent | Script source | Runtime path | Schedule | Purpose |
 |---|---|---|---|---|
-| `com.example.brainiac` | `.scripts/process-inbox.sh` | `~/.local/bin/brainiac-process-inbox.sh` | 6:30 AM daily | DOCX/PPTX → PDF, parse PDFs (Anthropic vision), git auto-commit/push |
-| `com.example.brainiac.icloud-pull` | `.scripts/bridge-icloud.sh` | `~/.local/bin/brainiac-icloud-pull.sh` | Every 5 min | Move iOS Web Clipper output from iCloud transit vaults into brainiac inboxes |
+| `com.<you>.<kb>` | `.scripts/process-inbox.sh` | `~/.local/bin/brainiac-process-inbox.sh` | 6:30 AM daily | DOCX/PPTX → PDF, parse PDFs (Anthropic vision), git auto-commit/push |
+| `com.<you>.<kb>.icloud-pull` | `.scripts/bridge-icloud.sh` | `~/.local/bin/brainiac-icloud-pull.sh` | Every 5 min | Move iOS Web Clipper output from iCloud transit vaults into brainiac inboxes |
 
 ## Processing — `/kb` skill modes
 

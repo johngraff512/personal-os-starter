@@ -2,7 +2,7 @@
 #
 # brainiac — iCloud Web Clipper bridge
 #
-# Runs every 5 min via ~/Library/LaunchAgents/com.example.brainiac.icloud-pull.plist
+# Runs every 5 min via ~/Library/LaunchAgents/com.<you>.<kb>.icloud-pull.plist
 #
 # Why this exists:
 #   iPhone/iPad Obsidian can only see vaults inside the iCloud Obsidian

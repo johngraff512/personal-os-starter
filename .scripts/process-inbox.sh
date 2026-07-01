@@ -2,7 +2,7 @@
 #
 # brainiac — daily inbox processor (LaunchAgent entry point)
 #
-# Runs at 6:30 am via ~/Library/LaunchAgents/com.example.brainiac.plist.
+# Runs at 6:30 am via ~/Library/LaunchAgents/kb-processor.plist (Label com.<you>.<kb>).
 # Pure file I/O + Anthropic API + git.
 #
 # IMPORTANT — script must NOT live in ~/Documents at runtime: macOS TCC blocks

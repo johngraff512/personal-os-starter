@@ -9,25 +9,26 @@
   them to real absolute paths (e.g. /Users/you/…) on first run. If you edit this
   file by hand, use absolute paths, not variables.
 
-  Install:
-      cp $BRAINIAC_ROOT/.scripts/com.example.brainiac.plist \
+  Install (the plist file itself keeps the stable name kb-processor.plist;
+  its Label — used by launchctl — is your com.<you>.<kb> prefix):
+      cp $BRAINIAC_ROOT/.scripts/kb-processor.plist \
          ~/Library/LaunchAgents/
-      launchctl load -w ~/Library/LaunchAgents/com.example.brainiac.plist
+      launchctl load -w ~/Library/LaunchAgents/kb-processor.plist
 
   Verify it's registered:
       launchctl list | grep brainiac
 
   Trigger manually for testing:
-      launchctl start com.example.brainiac
+      launchctl start com.<you>.<kb>
       tail -f "$BRAINIAC_ROOT/.scripts/launchagent.log"
 
   Unload (if you ever need to disable):
-      launchctl unload -w ~/Library/LaunchAgents/com.example.brainiac.plist
+      launchctl unload -w ~/Library/LaunchAgents/kb-processor.plist
 -->
 <plist version="1.0">
 <dict>
     <key>Label</key>
-    <string>com.example.brainiac</string>
+    <string>com.<you>.<kb></string>
 
     <key>ProgramArguments</key>
     <array>

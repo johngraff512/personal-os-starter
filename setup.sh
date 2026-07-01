@@ -42,8 +42,8 @@ ASSIST_NAME="${ASSIST_NAME:-your-assistant}"
 
 echo
 echo "About to replace:"
-echo "  <your-kb-name>             -> $KB_NAME       (identifiers: $KB_LOWER / \$$KB_UPPER)"
-echo "  <your-assistant-name>      -> $ASSIST_NAME"
+echo "  Brainiac / brainiac / BRAINIAC -> $KB_NAME / $KB_LOWER / $KB_UPPER"
+echo "  Nolan                          -> $ASSIST_NAME"
 echo "  \$BRAINIAC_ROOT             -> $KB_ROOT"
 echo "  <your-github-user>/<repo>  -> $GH_USER/$GH_REPO"
 echo "  <your-name>                -> $FULL_NAME"
@@ -79,6 +79,10 @@ while IFS= read -r -d '' f; do
     -e "s|\.brainiac-cache|.${KB_LOWER}-cache|g" \
     -e "s|BRAINIAC_ROOT|${KB_UPPER}_ROOT|g" \
     -e "s|BRAINIAC_PAT|${KB_UPPER}_PAT|g" \
+    -e "s|Brainiac|$KB_NAME|g" \
+    -e "s|BRAINIAC|$KB_UPPER|g" \
+    -e "s|brainiac|$KB_LOWER|g" \
+    -e "s|Nolan|$ASSIST_NAME|g" \
     "$f"
 done
 
@@ -93,6 +97,18 @@ done
 echo
 echo "=== Placeholders replaced. .bak backups left next to each changed file. ==="
 echo
+
+# Report any remaining <...> placeholders. These are optional, org/tool-specific
+# fill-ins (e.g. <your-org>, <your-research-kb>, <your-cloud-store>) that setup.sh
+# can't guess — you fill them by hand where they appear, or delete the lines if
+# you don't use that surface.
+LEFTOVERS=$(grep -rEoh '<[a-z][a-z-]+>' --include='*.md' . 2>/dev/null | sort -u)
+if [ -n "$LEFTOVERS" ]; then
+  echo "Optional manual fill-ins still in the docs (edit where they appear,"
+  echo "mostly work/CLAUDE.md and work/crossrefs.md, or delete if unused):"
+  echo "$LEFTOVERS" | sed 's/^/  /'
+  echo
+fi
 echo "NOTE: this script's placeholder substitution is cross-platform, but the manual"
 echo "steps below assume macOS. On Windows/Linux the KB core, skills, and parser work"
 echo "the same — only secret storage and scheduling differ. See docs/BUILD-GUIDE.md"
