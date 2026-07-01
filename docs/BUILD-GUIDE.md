@@ -205,7 +205,7 @@ Layer 1 works if you manually drop files into `aa-inbox/`. Layer 2 makes capture
 
 **Build the generic version.** In Apple's **Shortcuts** app:
 
-- **URL drop shortcut.** New Shortcut → accept input from Share Sheet → "Append to Text File" action → point it at `iCloud Drive → … → <vault>/aa-inbox/urls.txt`. Name it something memorable. Now it appears in every app's Share menu. [screenshot: the Append to Text File action with the path picker]
+- **URL drop shortcut.** New Shortcut → accept input from Share Sheet → "Append to Text File" action → point it at `iCloud Drive → … → <vault>/aa-inbox/urls.txt`. Name it something memorable. Now it appears in every app's Share menu. **Annotated, action-by-action screenshots of all three shortcuts are in [`ios-shortcuts/`](../ios-shortcuts/README.md).**
 - **Voice idea shortcut.** New Shortcut → "Dictate Text" (or accept typed input) → prepend a `- HH:MM ` timestamp → "Append to Text File" → `<vault>/ideas.md`. **The shortcut's name is the Siri phrase** (iOS no longer lets you record a custom phrase separately), so name it exactly what you'll say.
 
 Files must live in Obsidian's iCloud container so they sync to your Mac — see 2.2 for why.
